@@ -1,9 +1,17 @@
 package com.example.demo;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
+@Entity
 public class Customer {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @NotNull(message="Name is a required field")
     @NotBlank(message="Name cannot be blank")
     private String name;
@@ -11,18 +19,20 @@ public class Customer {
     private String mail_id;
     @ContactNumberConstraint
     private String number;
+    public Customer(){
 
-    public Customer(String name, String mail_id) {
-        this.id=Integer.toString(CustomerService.count);
+    }
+    public Customer(Integer id,String name, String mail_id) {
+        this.id=id;
         this.name=name;
         this.mail_id = mail_id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
